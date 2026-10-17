@@ -28,13 +28,14 @@
   <ul>
     <li><strong>We run no server for your data.</strong> We, the developer, do not receive, see or store your likes, videos, accounts, passwords, cookies or access tokens.</li>
     <li><strong>Your library stays on your device.</strong> Video IDs and links, watch history and settings are kept only in the app or extension on your device. Delete the app or extension and they are gone.</li>
+    <li><strong>Your photos and videos stay with you.</strong> Files you choose yourself for “My photos and videos” are copied only into Shuffler's storage on your device and are never sent anywhere.</li>
     <li><strong>Videos come straight from the original platform.</strong> Shuffler streams them from Instagram or YouTube for you, the signed-in user. It does not download or re-host them.</li>
     <li><strong>No ads, no tracking, no analytics, no selling of data.</strong></li>
   </ul>
 </section>
 
 <h2>Who we are</h2>
-<p>Shuffler is a free app — a Chrome extension and apps for iPhone, iPad and Android — for rewatching short videos you have already liked on Instagram and YouTube, in shuffled order. It is an independent project and is not affiliated with, endorsed or sponsored by Meta, Instagram, Google or YouTube.</p>
+<p>Shuffler is a free app — a Chrome extension and apps for iPhone, iPad and Android — for rewatching short videos you have already liked on Instagram and YouTube, and your own photos and videos that you choose yourself, in shuffled order. It is an independent project and is not affiliated with, endorsed or sponsored by Meta, Instagram, Google or YouTube.</p>
 <ul class="facts">
   <li>Controller responsible for this policy: Daniil Baev (Daniil Nikolaevich Baev), the developer of Shuffler</li>
   <li>Email: <a href="mailto:danivichkin@gmail.com">danivichkin@gmail.com</a></li>
@@ -47,9 +48,20 @@
   <li>which videos you have already watched, the current round and recently viewed videos;</li>
   <li>your settings, such as sources, period and language;</li>
   <li>the name and ID of each connected account, so that every account keeps its own separate library;</li>
+  <li>copies of the photos and videos you chose yourself for “My photos and videos” (details below);</li>
   <li>a short technical log for troubleshooting, without passwords, cookies or tokens.</li>
 </ul>
 <p>None of this is sent to us or to anyone else. Shuffler has no user accounts, no cloud sync and no backend. Comments are loaded from the platform when you open them and are not saved in the library.</p>
+
+<h2 id="photos">Your photos and videos (“My photos and videos”)</h2>
+<p>This source works without any account. You choose the files yourself in the system picker: on iPhone and iPad, the system Photos picker, which hands the app only what you select and gives no access to the whole library; on Android, the system photo and video picker, with no storage or media-library permission; in Chrome, the ordinary file dialog. Shuffler does not read or browse any other files.</p>
+<ul>
+  <li>Shuffler keeps copies of only the selected files in its private storage on your device (in Chrome, the extension's storage in your browser), with the details needed to show them: type, size, picture dimensions, duration, date added and the shuffle order. Photos in formats such as HEIC are kept as a JPEG copy.</li>
+  <li>File names and paths are not stored. To avoid adding the same file twice, only an irreversible fingerprint (hash) of the system identifier of the chosen file is kept — in Chrome, of the file's name, size and modification date.</li>
+  <li>A copy is the file itself: if a photo contains, for example, the date or place it was taken, that stays in the copy on your device. Shuffler uses only its orientation and size to display it. File names, contents and details never enter the diagnostic file.</li>
+  <li>Copies are never sent to us or anyone else. On iPhone and iPad they are excluded from backups (iCloud and computer); on Android, Shuffler's data is excluded from backups and device transfer.</li>
+  <li>Shuffler never changes or deletes the originals in your gallery or on your disk.</li>
+</ul>
 
 <h2>What we receive</h2>
 <p>Nothing, unless you write to us. Shuffler contains no analytics, advertising, tracking or crash-reporting code that sends data to us.</p>
@@ -83,7 +95,8 @@
 <ul>
   <li>Your library stays on your device until you delete it. Signing out or turning a source off does not erase it, so you can come back to the same account later.</li>
   <li>To delete everything Shuffler stored: remove the extension from Chrome; on iPhone or iPad, delete the app (not “Offload App”); on Android, uninstall the app or clear its storage. This also removes the Instagram sign-in saved in the app.</li>
-  <li>On iPhone and iPad, a device backup you make (for example, iCloud Backup) may contain a copy of the app's data, depending on your backup settings.</li>
+  <li>Photos and videos: “Remove from collection” (the bin icon by a photo or video) deletes the copy of that file, and <em>Settings → Sources → My photos and videos → Clear collection</em> deletes all copies with the collection's order and history after you confirm. Deleting the app or extension also deletes the copies. The originals in your gallery are not changed. Signing out of Instagram or YouTube does not affect the collection.</li>
+  <li>On iPhone and iPad, a device backup you make (for example, iCloud Backup) may contain a copy of the app's data, depending on your backup settings. Copies of your chosen photos and videos are not included.</li>
   <li>To revoke Google access, use the <a href="https://security.google.com/settings/security/permissions">Google security settings page</a>. This does not delete your Google account or your likes on YouTube.</li>
   <li>Your likes and accounts on Instagram and YouTube are managed on those platforms. Deleting Shuffler does not change them.</li>
   <li>Emails you sent us are deleted on request.</li>
@@ -93,7 +106,7 @@
 <p>We do not sell, rent or share personal data, and we do not use it for advertising, profiling or credit decisions. Since we do not receive your data, there is nothing for us to share.</p>
 
 <h2>Children</h2>
-<p>Shuffler is not directed at children. It requires your own Instagram or YouTube account, and those services set their own minimum ages.</p>
+<p>Shuffler is not directed at children. Its liked-video features require your own Instagram or YouTube account, and those services set their own minimum ages.</p>
 
 <h2>Your rights</h2>
 <p>Your Shuffler data is on your device and under your control: you can delete it at any time as described above. For anything we hold about you — in practice, only emails you sent us — you can ask for access, correction or deletion, or object to its use, under the GDPR and similar laws. We handle such emails to answer your request (GDPR Art. 6(1)(b)) and in our legitimate interest in supporting and improving Shuffler (Art. 6(1)(f)). You can also complain to your local data protection authority.</p>
