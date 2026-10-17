@@ -1,0 +1,26 @@
+/* Shuffler legal and support pages. Self-contained: no fonts, images or scripts from other sites. */
+:root{color-scheme:dark;--bg:#16111f;--surface:#211a2e;--ink:#f3effa;--muted:#b8afc7;--accent:#cdbdff;--sunset:#ffb08a;--line:#ffffff1f;background:var(--bg);color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{box-sizing:border-box}
+body{max-width:46rem;margin:0 auto;padding:0 16px 3rem;background:var(--bg);overflow-wrap:break-word}
+a{color:var(--accent);text-underline-offset:.15em;overflow-wrap:anywhere}
+a:hover,a:focus-visible{color:var(--sunset)}
+:focus-visible{outline:2px solid var(--sunset);outline-offset:2px;border-radius:4px}
+h1,h2,h3{line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(1.5rem,7vw,2.25rem);margin:2rem 0 .25rem;hyphens:auto}
+h2{font-size:1.3rem;margin:2.25rem 0 .5rem}
+h3{font-size:1.05rem;margin:1.5rem 0 .25rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-inline-start:1.25rem}
+li{margin-block:.4rem}
+.site-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.25rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:.55rem;color:var(--ink);font-weight:800;font-size:1.15rem;text-decoration:none}
+.brand::before{content:"";width:.95rem;height:.95rem;border-radius:50%;background:linear-gradient(135deg,#ffad6b,#ff5c93,#c77dff)}
+.site-nav,.footer-nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem}
+.site-nav{font-size:.95rem}
+.site-nav a[aria-current="page"]{color:var(--ink);font-weight:700;text-decoration:none}
+.lang{font-weight:600}
+.updated{color:var(--muted);margin-top:0}
+.summary{margin:1.5rem 0;padding:.75rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:1rem}
+.summary h2{margin-top:.5rem;font-size:1.1rem;color:var(--sunset)}
+.facts{list-style:none;padding:0}
+.site-footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}

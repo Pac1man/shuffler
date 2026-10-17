@@ -1,0 +1,74 @@
+/* Review dock (?review=1) — presentation control. Deliberately neutral
+   (graphite, system font) so it never reads as part of the app's UI. */
+.rv {
+  --rv-bg: rgb(18 18 22 / .78);
+  --rv-fg: #f4f4f6;
+  --rv-mute: rgb(244 244 246 / .58);
+  --rv-line: rgb(255 255 255 / .12);
+  --rv-on: #f4f4f6;
+  --rv-on-fg: #141418;
+  position: fixed;
+  z-index: 2147483000;
+  font: 500 12px/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--rv-fg);
+  -webkit-font-smoothing: antialiased;
+}
+.rv * { box-sizing: border-box; }
+.rv button, .rv a { font: inherit; color: inherit; }
+.rv-panel {
+  width: 214px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--rv-bg);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--rv-line);
+  box-shadow: 0 10px 30px rgb(0 0 0 / .28);
+}
+.rv-back { display: inline-block; text-decoration: none; color: var(--rv-mute); margin-bottom: 8px; }
+.rv-back:hover { color: var(--rv-fg); }
+.rv-title { margin: 0 0 10px; font-size: 13px; font-weight: 650; display: flex; gap: 8px; align-items: baseline; }
+.rv-title b { font-variant-numeric: tabular-nums; color: var(--rv-mute); font-weight: 600; }
+.rv-states { display: grid; gap: 2px; }
+.rv-states button, .rv-row button {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; min-height: 30px; padding: 5px 8px;
+  border: 0; border-radius: 9px; background: transparent; cursor: pointer; text-align: left;
+}
+.rv-states button:hover, .rv-row button:hover { background: rgb(255 255 255 / .08); }
+.rv-states button[aria-pressed="true"] { background: var(--rv-on); color: var(--rv-on-fg); }
+.rv kbd { font: 600 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; min-width: 18px; padding: 3px 0; text-align: center; border-radius: 5px; border: 1px solid currentColor; opacity: .55; }
+.rv-row { display: grid; grid-template-columns: 1fr; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rv-line); }
+.rv-row button { color: var(--rv-mute); }
+.rv-hint { margin: 8px 0 0; color: var(--rv-mute); font-size: 11px; }
+.rv :focus-visible { outline: 2px solid #9fd0ff; outline-offset: 2px; }
+
+.rv-tab { display: none; }
+
+@media (min-width: 1100px) {
+  .rv { left: 16px; bottom: 16px; }
+}
+
+@media (max-width: 1099px) {
+  .rv { left: 0; top: 50%; translate: 0 -50%; display: flex; align-items: center; }
+  .rv-tab {
+    display: grid; place-items: center;
+    width: 20px; height: 60px; padding: 0;
+    border: 1px solid var(--rv-line); border-left: 0; border-radius: 0 10px 10px 0;
+    background: var(--rv-bg); color: var(--rv-mute); cursor: pointer;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    font-size: 10px; font-weight: 700; writing-mode: vertical-rl;
+  }
+  .rv-panel {
+    position: absolute; left: 26px; top: 50%;
+    translate: -8px -50%; opacity: 0; visibility: hidden;
+    transition: opacity .18s ease, translate .18s ease, visibility 0s .18s;
+  }
+  .rv[data-open="true"] .rv-panel { translate: 0 -50%; opacity: 1; visibility: visible; transition: opacity .18s ease, translate .18s ease; }
+}
+
+@media (max-width: 1099px) {
+  :root[data-motion="reduced"] .rv-panel { transition: opacity .12s linear, visibility 0s .12s; translate: 0 -50%; }
+}
+
+:root.is-embed .rv { display: none; }

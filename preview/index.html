@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1a0d1c">
+  <title>Shuffler — демо</title>
+  <meta name="description" content="Интерактивный макет Shuffler. Все ролики, имена и комментарии в демо вымышленные.">
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="../assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/reel-art.css">
+  <link rel="stylesheet" href="assets/review.css">
+  <link rel="stylesheet" href="assets/liquid-base.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/shuffler-core.js" defer></script>
+  <script src="assets/liquid-app.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Refraction filters for big glass surfaces are generated into #lg-defs at runtime (Chromium). -->
+  <svg class="lg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs id="lg-defs"></defs>
+  </svg>
+
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <!-- ============================ ONBOARDING ============================ -->
+  <section class="onb" id="onb" aria-labelledby="onb-title" hidden>
+    <div class="onb-stage" aria-hidden="true">
+      <div class="orbit" id="orbit"></div>
+      <div class="lens glass" id="lens" data-lg="lens"><span class="lens-logo" id="lens-logo"></span></div>
+      <span class="ripple" id="ripple"></span>
+    </div>
+    <div class="onb-copy">
+      <p class="onb-kicker"><span class="onb-mark"></span>shuffler</p>
+      <h1 id="onb-title">Твои старые лайки.<br><span>Вперемешку.</span></h1>
+      <p class="onb-lead">Рилсы и шортсы из твоих лайков — снова в ленте, в случайном порядке. Привет из 2020-го.</p>
+      <div class="onb-sources" role="group" aria-label="Источники">
+        <span class="chip">Instagram Reels</span>
+        <span class="chip">YouTube Shorts</span>
+      </div>
+      <button class="cta" id="onb-start" type="button"><span class="cta-ic"></span><span>Перемешать мои лайки</span></button>
+      <p class="onb-note">Всё работает в твоём браузере — без серверов и без записи в аккаунт.</p>
+    </div>
+  </section>
+
+  <!-- =============================== FEED =============================== -->
+  <main class="feed" id="feed" aria-label="Лента Shuffler" hidden>
+    <div class="frame" id="frame">
+      <div class="stage" id="stage"></div>
+
+      <div class="overlay">
+        <!-- top-right corner: a neutral «open original» link + settings (no platform logos) -->
+        <div class="corner" id="corner">
+          <button class="src-mark open-original" id="src-mark" type="button" aria-label="Открыть оригинал" title="Открыть оригинал"></button>
+          <button class="icon-btn" id="open-settings" type="button" aria-label="Настройки" aria-haspopup="dialog"></button>
+        </div>
+
+        <div class="meta-wrap">
+          <p class="pausechip" id="pausechip" role="status" hidden><span class="sr-only">Источник рилсов попросил паузу — рилсы вернутся примерно через минуту, пока играют шортсы.</span><span class="pc-ic" aria-hidden="true"></span><span aria-hidden="true">Рилсы вернутся через <b data-countdown>1:00</b></span></p>
+          <div class="meta" id="meta">
+          <p class="yearchip" id="yearchip" aria-live="polite"><span class="yc-ic"></span><span class="yc-label">Лайкнуто в</span><span class="yc-year" id="yc-year"><b>2021</b></span></p>
+          <p class="author" id="author">@author</p>
+          <p class="caption" id="caption">caption</p>
+          <p class="sound" id="sound"><span class="sound-ic"></span><span class="sound-track"><span id="sound-text">оригинальный звук</span></span></p>
+          </div>
+        </div>
+
+        <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+        <div class="hint" id="hint" aria-hidden="true"><span class="hint-ic"></span>Свайп вверх — следующий</div>
+      </div>
+
+      <nav class="rail" id="rail" aria-label="Действия с роликом">
+        <button class="rail-btn" id="like" type="button" aria-pressed="true" aria-label="Убрать лайк"><span class="rail-ic"></span></button>
+        <button class="rail-btn" id="comments" type="button" aria-label="Комментарии" aria-haspopup="dialog"><span class="rail-ic"></span></button>
+        <button class="rail-btn" id="share" type="button" aria-label="Поделиться"><span class="rail-ic"></span></button>
+        <button class="rail-btn" id="reshuffle" type="button" aria-label="Перемешать ещё раз" title="Перемешать ещё раз"><span class="rail-ic"></span></button>
+      </nav>
+    </div>
+
+    <p class="kbd-hint" aria-hidden="true"></p>
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+  </main>
+
+  <!-- ============================= SETTINGS ============================= -->
+  <dialog class="sheet glass" id="settings" aria-labelledby="settings-title" data-lg="sheet">
+    <div class="sheet-grab" aria-hidden="true"><i></i></div>
+    <div class="panes" id="panes">
+      <section class="pane pane-main">
+        <header class="sheet-head">
+          <h2 class="head-title" id="settings-title" tabindex="-1">Настройки</h2>
+          <button class="icon-btn small" type="button" data-close aria-label="Закрыть"></button>
+        </header>
+        <div class="pane-body" data-scroll>
+          <p class="big-title" aria-hidden="true">Настройки</p>
+
+          <h3 class="group-title">Источники</h3>
+          <div class="group">
+            <label class="row">
+              <span class="row-text"><b>Instagram Reels</b></span>
+              <input type="checkbox" class="switch" role="switch" id="src-ig" checked>
+            </label>
+            <label class="row">
+              <span class="row-text"><b>YouTube Shorts</b></span>
+              <input type="checkbox" class="switch" role="switch" id="src-yt" checked>
+            </label>
+          </div>
+
+          <h3 class="group-title" id="period-title">Период лайков</h3>
+          <div class="group">
+            <div class="seg" id="period" role="radiogroup" aria-labelledby="period-title">
+              <span class="seg-thumb" aria-hidden="true"></span>
+            </div>
+            <div class="range" id="range" hidden>
+              <label class="range-field" data-label="Начало периода"><span class="rf-month"></span><span class="rf-year"></span><input type="month" id="range-from" value="2021-03" min="2020-01" max="2026-10"></label>
+              <span class="range-dash" aria-hidden="true"></span>
+              <label class="range-field" data-label="Конец периода"><span class="rf-month"></span><span class="rf-year"></span><input type="month" id="range-to" value="2022-12" min="2020-01" max="2026-10"></label>
+            </div>
+            <p class="seg-hint" id="period-hint"></p>
+          </div>
+
+          <h3 class="group-title">Приложение</h3>
+          <div class="group">
+            <button class="row" type="button" id="lang-row" popovertarget="lang-menu">
+              <span class="row-ic lang"></span>
+              <span class="row-text"><b>Язык</b></span>
+              <span class="row-value" id="lang-value">Русский</span><span class="row-chev"></span>
+            </button>
+            <!-- light theme is not planned: the appearance row stays in the DOM only because the shared script binds to it -->
+            <div class="row" hidden>
+              <span class="row-ic theme"></span>
+              <span class="row-text"><b>Оформление</b></span>
+              <div class="mini-seg" role="radiogroup" aria-label="Оформление" id="theme-seg">
+                <button type="button" role="radio" data-theme-pick="light" aria-label="Светлое"></button>
+                <button type="button" role="radio" data-theme-pick="dark" aria-label="Тёмное"></button>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="group-title">Помощь</h3>
+          <div class="group">
+            <button class="row" type="button" data-open-pane="report">
+              <span class="row-ic report"></span>
+              <span class="row-text"><b>Сообщить о проблеме</b><small>Опиши, что пошло не так</small></span>
+              <span class="row-chev"></span>
+            </button>
+          </div>
+          <p class="sheet-foot">Shuffler · демо · все ролики, имена и комментарии вымышленные</p>
+        </div>
+      </section>
+
+      <section class="pane pane-detail" id="pane-detail" aria-live="polite">
+        <header class="sheet-head">
+          <button class="icon-btn small back" type="button" data-back aria-label="Назад"></button>
+          <h2 class="head-title" id="detail-title" tabindex="-1">Сообщить о проблеме</h2>
+          <span class="head-spacer" aria-hidden="true"></span>
+        </header>
+        <div class="pane-body" data-scroll id="detail-body"></div>
+      </section>
+    </div>
+    <div class="lang-menu" id="lang-menu" popover role="menu" aria-label="Язык"></div>
+  </dialog>
+
+  <!-- ============================= COMMENTS ============================= -->
+  <dialog class="sheet glass comments" id="comments-sheet" aria-labelledby="comments-title" data-lg="sheet">
+    <div class="sheet-grab" aria-hidden="true"><i></i></div>
+    <section class="pane pane-main">
+      <header class="sheet-head">
+        <h2 class="head-title" id="comments-title" tabindex="-1">Комментарии</h2>
+        <button class="icon-btn small" type="button" data-close aria-label="Закрыть"></button>
+      </header>
+      <div class="pane-body" data-scroll>
+        <ul class="c-list" id="comment-list"></ul>
+      </div>
+      <form class="composer" id="composer" autocomplete="off">
+        <span class="avatar me" aria-hidden="true">Я</span>
+        <label class="composer-field">
+          <input type="text" placeholder="Добавить комментарий…" aria-label="Комментарий" enterkeyhint="send">
+          <button type="button" class="composer-emoji" aria-label="Добавить эмодзи"></button>
+        </label>
+        <button class="composer-send" type="submit" aria-label="Отправить" disabled></button>
+      </form>
+    </section>
+  </dialog>
+</body>
+</html>

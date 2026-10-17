@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Shuffler · interactive demo. Palette: «Закат» (sunset), dark only.
+   Fonts: Nunito + Playfair Display (SIL OFL), self-hosted in ../assets/fonts.
+   All reels, names and comments are synthetic: gradients, emoji, invented captions.
+   ========================================================================== */
+
+/* ---------- shape + type for the feed and the state cards ---------- */
+:root {
+  --font-display: "Playfair Display", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --w-display: 600;
+  --w-title: 600;
+  --ls-display: -.012em;
+  --ls-title: -.006em;
+  --display-size: clamp(36px, 10vw, 72px);
+  --r-sheet: 40px;
+  --r-group: 26px;
+  --r-row-ic: 50%;
+  --r-field: 20px;
+  --r-frame: 38px;
+  --r-media: 18px;
+  --rail: 48px;
+  --rail-gap: 18px;
+  --rail-glyph: 30px;
+  --head-pad-x: 24px;
+}
+
+/* ---------- «Закат» dark palette ---------- */
+:root, :root[data-theme="dark"] {
+  --bg: #1a0d1c;
+  --ink: #fff4ec;
+  --ink-2: rgb(255 244 236 / .66);
+  --ink-3: rgb(255 244 236 / .42);
+  --g-fill: rgb(46 20 40 / .5);
+  --g-blur: 24px;
+  --g-sat: 1.3;
+  --g-shadow: 0 14px 34px -16px rgb(10 0 8 / .6);
+  --rim-top: rgb(255 222 200 / .24);
+  --rim-bot: rgb(255 222 200 / .06);
+  --ov-fill: rgb(44 14 32 / .3);
+  --ov-ink: #fff4ec;
+  --ov-line: rgb(255 228 210 / .14);
+  --desk-fill: transparent;
+  --desk-ink: var(--ink);
+  --desk-line: transparent;
+  --sheet-fill: rgb(36 15 32 / .9);
+  --sheet-shadow: 0 30px 80px -24px rgb(10 0 8 / .75);
+  --row-fill: rgb(255 225 205 / .055);
+  --row-press: rgb(255 225 205 / .1);
+  --sep: rgb(255 225 205 / .08);
+  --track: rgb(255 225 205 / .12);
+  --seg-thumb: rgb(255 236 222 / .16);
+  --seg-ink: #fff4ec;
+  --backdrop: rgb(14 2 12 / .45);
+  --accent: #ffb08a;
+  --accent-fill: linear-gradient(120deg, #ff7a59, #ffb547);
+  --on-accent: #2a0f22;
+  --cta-bg: linear-gradient(100deg, #ff6f61 0%, #ff9a4d 55%, #ffc15e 100%);
+  --cta-ink: #2a0f22;
+  --cta-shadow: 0 18px 40px -18px rgb(255 120 80 / .65);
+  --switch-on: #ff8a5c;
+  --knob: #f5e6dc;
+  --knob-on: #fff;
+  --knob-shadow: 0 1px 3px rgb(20 0 10 / .35);
+  --heart: #ff5470;
+  --tile-bg: rgb(255 160 120 / .14);
+  --tile-ink: #ffb08a;
+  --chip-bg: rgb(255 225 205 / .07);
+  --chip-line: rgb(255 225 205 / .1);
+  --amb-o: .5;
+  --card-1: #251029;
+  --card-2: #6a2150;
+  --card-3: #e8744f;
+  --card-ink: #fff4ec;
+  --card-ink-2: rgb(255 244 236 / .76);
+  --card-surface: rgb(255 236 222 / .1);
+  --card-line: rgb(255 236 222 / .22);
+  --card-accent: #ffc15e;
+  --card-on-accent: #2a0f22;
+  --focus: #ffb08a;
+  --lens-fill: rgb(255 214 190 / .06);
+  --lens-rim: rgb(255 226 206 / .38);
+  --lens-shadow: 0 30px 70px -26px rgb(255 110 80 / .45);
+  --sun-1: #ffd27a;
+  --sun-2: #ff8a5c;
+  --sun-3: #ff5e7a;
+}
+
+/* extra tokens: ripple ring, pause-tank water */
+:root, :root[data-theme="dark"] {
+  --ripple: rgb(255 176 138 / .55);
+  --water-top: rgb(255 184 96 / .62);
+  --water-bot: rgb(255 98 112 / .62);
+}
+
+/* ==========================================================================
+   WELCOME / ONBOARDING — Nunito, extra-heavy display, the gradient word
+   without italics, clear lens (glass preset in app.js).
+   ========================================================================== */
+.onb {
+  --font: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font);
+  --font-num: var(--font);
+  --w-display: 850;
+  --ls-display: -.025em;
+  --display-size: clamp(30px, 8.6vw, 64px);
+  font-family: var(--font);
+}
+.onb h1 span {
+  background: linear-gradient(95deg, #ff8a6b, #ffb35c 60%, #ffd27a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.onb-lead { font-weight: 500; }
+.onb .cta { font-weight: 800; }
+.onb .chip { font-weight: 700; }
+
+/* ==========================================================================
+   FEED + PAUSE CHIP
+   ========================================================================== */
+/* corner: one capsule with two flat glyphs */
+.corner {
+  gap: 0;
+  padding: 2px;
+  border-radius: 99px;
+  background: var(--ov-fill);
+  box-shadow: inset 0 0 0 1px var(--ov-line);
+  -webkit-backdrop-filter: blur(var(--ov-blur)) saturate(1.2);
+  backdrop-filter: blur(var(--ov-blur)) saturate(1.2);
+}
+.corner .src-mark, .corner .icon-btn { width: 42px; height: 40px; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.corner .src-mark { position: relative; }
+.corner .src-mark::after { content: ""; position: absolute; right: -.5px; top: 11px; bottom: 11px; width: 1px; background: var(--ov-line); }
+.feed[data-card] .corner .src-mark { display: none; }
+.feed[data-card] .corner { padding: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.feed[data-card] .corner .icon-btn { width: var(--btn); height: var(--btn); }
+
+/* rail: bare glyphs with a soft shadow */
+.rail-ic {
+  background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / .35));
+}
+.rail-ic svg { stroke-width: 1.9; }
+@media (min-width: 900px) {
+  .rail-ic { filter: none; color: var(--ink); }
+  .rail-btn:hover .rail-ic { color: var(--accent); }
+}
+
+/* year: serif italic numerals */
+.yc-year { font-family: var(--font-display); font-style: italic; font-size: 15px; font-variant-numeric: lining-nums tabular-nums; }
+.yc-year b { font-weight: 600; line-height: 1.22; }
+.yearchip { height: 30px; }
+.yc-ic { color: #ffb08a; }
+
+/* ==========================================================================
+   MENU / SETTINGS + COMMENTS — plain title bar with the close button,
+   system type, calmer radii, rounded-square row icons.
+   ========================================================================== */
+.sheet {
+  --font-display: var(--font);
+  --w-title: 680;
+  --ls-title: -.025em;
+  --r-sheet: 30px;
+  --r-group: 18px;
+  --r-row-ic: 9px;
+  --r-field: 16px;
+  --r-media: 14px;
+  --head-pad-x: 22px;
+}
+
+/* ==========================================================================
+   STATE CARDS
+   ========================================================================== */
+.card-title { font-size: 28px; line-height: 1.12; }
+
+/* ---- first load: a hand of three postcards, dealt and re-dealt, sealed by the logo ---- */
+.vb-fan { position: relative; width: 210px; height: 168px; }
+.vb-fan i {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  width: 70px;
+  height: 118px;
+  margin-left: -35px;
+  border-radius: 14px;
+  background: linear-gradient(165deg, var(--c1), var(--c2));
+  box-shadow: 0 14px 28px -14px rgb(20 0 10 / .55), inset 0 0 0 1px rgb(255 255 255 / .18);
+  transform-origin: 50% 130%;
+  rotate: var(--r);
+  animation: vb-deal 4.2s cubic-bezier(.6, 0, .3, 1) infinite;
+  animation-delay: var(--d);
+}
+@keyframes vb-deal {
+  0%, 30%, 100% { translate: 0 0; }
+  12% { translate: 0 -22px; }
+}
+.vb-fan .sh-logo { position: absolute; left: 50%; bottom: 0; margin-left: -30px; width: 60px; height: 60px; filter: drop-shadow(0 10px 18px rgb(20 0 10 / .35)); }
+
+/* ---- waiting: a contact sheet whose cells light up one by one around the logo,
+        the logo itself stretched into a card of the same shape ---- */
+.fx-grid { display: grid; grid-template-columns: repeat(3, 44px); gap: 6px; }
+.fx-grid i {
+  position: relative;
+  height: 62px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card-surface);
+  box-shadow: inset 0 0 0 1px var(--card-line);
+}
+.fx-grid i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, var(--c1), var(--c2));
+  opacity: 0;
+  animation: fx-fill 4.5s steps(1, end) infinite;
+  animation-delay: calc(var(--n) * .35s);
+}
+@keyframes fx-fill { 0% { opacity: 0; } 8% { opacity: 1; } 78% { opacity: 1; } 92% { opacity: 0; } }
+.fx-logo { display: block; width: 44px; height: 62px; filter: drop-shadow(0 8px 14px rgb(20 0 10 / .3)); }
+/* counter under the animation */
+.vb-count { margin: 16px 0 0; display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+.vb-count b { font: italic 600 54px/1 var(--font-display); letter-spacing: -.01em; font-variant-numeric: lining-nums tabular-nums; }
+.vb-count b.tick { animation: vb-tick .5s var(--spring); }
+@keyframes vb-tick { from { opacity: .4; translate: 0 -4px; } }
+.vb-count span { font-size: 14px; font-weight: 600; color: var(--card-ink-2); }
+
+/* ---- pause (HTTP 429): a glass tank that drains over the minute; sunset water ---- */
+.vc-tank {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 44px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--card-surface);
+  box-shadow: inset 0 0 0 1px var(--card-line);
+}
+.vc-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--lvl, 12%);
+  background: linear-gradient(180deg, var(--water-top), var(--water-bot));
+  transition: height 1s var(--ease-out);
+}
+.vc-water::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 200%;
+  height: 10px;
+  background: var(--water-top);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M0 10V5C15 0 15 0 30 5S45 10 60 5 75 0 90 5 105 10 120 5V10Z'/%3E%3C/svg%3E") 0 0 / 50% 100% repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10' preserveAspectRatio='none'%3E%3Cpath d='M0 10V5C15 0 15 0 30 5S45 10 60 5 75 0 90 5 105 10 120 5V10Z'/%3E%3C/svg%3E") 0 0 / 50% 100% repeat-x;
+  animation: vc-wave 3s linear infinite;
+}
+@keyframes vc-wave { to { translate: -50% 0; } }
+.vc-num { position: relative; display: grid; justify-items: center; gap: 4px; }
+.vc-num b { font: italic 600 44px/1 var(--font-display); letter-spacing: -.01em; font-variant-numeric: lining-nums tabular-nums; }
+.vc-num small { font-size: 13px; font-weight: 600; color: var(--card-ink-2); }
+
+/* ---- error ---- */
+.vb-tile {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--card-surface);
+  box-shadow: inset 0 0 0 1px var(--card-line);
+}
+.vb-tile svg { width: 42px; height: 42px; }
+
+/* ---- all watched: the sun has set behind the logo ---- */
+.vb-sky { position: relative; width: 210px; height: 104px; overflow: hidden; }
+.vb-sky::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--card-line) 20%, var(--card-line) 80%, transparent); }
+.vb-sun {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--sun-1, #ffd27a), var(--sun-2, #ff8a5c) 58%, var(--sun-3, #ff5e7a));
+  -webkit-mask: linear-gradient(#000 0 58%, transparent 58% 62%, #000 62% 70%, transparent 70% 75%, #000 75% 83%, transparent 83% 89%, #000 89%);
+  mask: linear-gradient(#000 0 58%, transparent 58% 62%, #000 62% 70%, transparent 70% 75%, #000 75% 83%, transparent 83% 89%, #000 89%);
+  translate: 0 var(--sink, 30%);
+  transition: translate 1s var(--ease-out);
+}
+.vb-sky.done { height: 112px; }
+.vb-sky.done .vb-sun { --sink: 58%; opacity: .9; }
+.vb-sky.done .sh-logo { position: absolute; left: 50%; bottom: 10px; margin-left: -34px; width: 68px; height: 68px; filter: drop-shadow(0 10px 18px rgb(20 0 10 / .3)); }
+.vb-stars { position: absolute; inset: 0; }
+.vb-stars svg { position: absolute; width: 16px; height: 16px; color: var(--card-accent); }
+.vb-stars svg:nth-child(1) { left: 20px; top: 14px; }
+.vb-stars svg:nth-child(2) { right: 28px; top: 4px; width: 12px; height: 12px; }
+
+/* short phones: keep the waiting card clear of the settings button */
+@media (max-height: 700px) {
+  .fx-grid { grid-template-columns: repeat(3, 36px); gap: 5px; }
+  .fx-grid i, .fx-logo { height: 51px; }
+  .fx-logo { width: 36px; }
+  .vb-count { margin-top: 10px; }
+  .vb-count b { font-size: 44px; }
+  .vc-tank { width: 124px; height: 124px; border-radius: 36px; }
+  .vb-fan { zoom: .8; }
+}
+
+/* reduced motion: the base rule stops `.card-visual *`, but not pseudo-elements */
+:root[data-motion="reduced"] .fx-grid i::after { animation: none; opacity: 1; }
+:root[data-motion="reduced"] .vc-water::before { animation: none; }
+
+/* ==========================================================================
+   NEUTRAL «OPEN ORIGINAL» CONTROL + PLAIN SOURCE NAMES (no platform logos)
+   ========================================================================== */
+.corner .src-mark.open-original { padding: 0; border: 0; border-radius: 99px; color: var(--ov-ink); cursor: pointer; font: inherit; }
+.corner .src-mark.open-original svg { width: 21px; height: 21px; }
+.corner .src-mark.open-original:active { scale: .92; }
+.onb .chip { padding: 0 15px; }
+
+/* the welcome screen leaves room on the left for the review dock only when it is shown */
+@media (min-width: 1100px) { :root:not(.is-review) .onb { padding-left: 48px; } }

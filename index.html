@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#1a0d1c">
+  <title>Shuffler — твои старые лайки, вперемешку</title>
+  <meta name="description" content="Shuffler возвращает рилсы и шортсы, которые ты когда-то лайкнул, — в одну спокойную ленту без повторов. Без рекламы и трекинга: библиотека живёт только на твоём устройстве.">
+  <link rel="canonical" href="https://pac1man.github.io/shuffler/">
+  <link rel="alternate" hreflang="ru" href="https://pac1man.github.io/shuffler/">
+  <link rel="alternate" hreflang="en" href="https://pac1man.github.io/shuffler/en/">
+  <link rel="alternate" hreflang="x-default" href="https://pac1man.github.io/shuffler/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shuffler">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Shuffler — твои старые лайки, вперемешку">
+  <meta property="og:description" content="Рилсы и шортсы, которые ты когда-то лайкнул, — снова в одной спокойной ленте. Помнишь это?">
+  <meta property="og:url" content="https://pac1man.github.io/shuffler/">
+  <meta property="og:image" content="https://pac1man.github.io/shuffler/assets/og-ru.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Shuffler: три открытки с эмодзи на фоне заката и надпись «Твои старые лайки. Вперемешку.»">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <!-- Icons: Lucide (ISC License, see assets/LICENSE-lucide.txt). Logo: Shuffler. -->
+    <symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#D5C6FF"/><path d="M32 49 15.7 33.2a11.1 11.1 0 0 1 0-15.7 11.1 11.1 0 0 1 15.7 0l.6.6.6-.6a11.1 11.1 0 0 1 15.7 15.7L32 49Z" fill="#251B36"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-7.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><path d="M12 2v20"/><path d="m8 18 4 4 4-4"/><path d="m8 6 4-4 4 4"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-login" viewBox="0 0 24 24"><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+    <symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="m2 2 20 20"/><path d="M5.782 5.782A7 7 0 0 0 9 19h8.5a4.5 4.5 0 0 0 1.307-.193"/><path d="M21.532 16.5A4.5 4.5 0 0 0 17.5 10h-1.79A7.008 7.008 0 0 0 10 5.07"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main">К содержанию</a>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="index.html" aria-label="Shuffler — на главную"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>shuffler</a>
+      <nav class="top-nav" aria-label="Разделы">
+        <a href="#demo">Превью</a>
+        <a href="#how">Как это работает</a>
+        <a href="#privacy">Приватность</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <div class="top-actions">
+        <a class="lang" href="en/index.html" hreflang="en" lang="en" aria-label="EN — English version">EN</a>
+        <a class="btn btn-primary top-cta" href="mailto:danivichkin@gmail.com?subject=Shuffler%20beta">Хочу в бету</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">помнишь это?</p>
+          <h1 id="hero-title">Твои старые лайки. <span class="grad">Вперемешку.</span></h1>
+          <p class="hero-sub">Рилсы и шортсы, которые ты когда-то лайкнул, — снова в одной спокойной ленте. Только твои лайки, в случайном порядке и без повторов.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="mailto:danivichkin@gmail.com?subject=Shuffler%20beta"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Хочу в бету</a>
+            <a class="btn btn-ghost" href="#demo"><svg class="ic" aria-hidden="true"><use href="#i-arrow-down"/></svg>Посмотреть превью</a>
+          </div>
+          <div class="platforms">
+            <span class="platforms-label" id="platforms-label">Где работает</span>
+            <ul class="chips" aria-labelledby="platforms-label">
+              <li class="chip"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg>iPhone <small>бета в TestFlight</small></li>
+              <li class="chip"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg>Android</li>
+              <li class="chip"><svg class="ic" aria-hidden="true"><use href="#i-monitor"/></svg>Chrome <small>расширение</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="sun-glow"></div>
+          <div class="sun"></div>
+          <div class="horizon"></div>
+          <div class="pc pc-1"><div class="pc-in" style="--c1:#f093fb;--c2:#f5576c;--c3:#ffd1ff"><span class="pc-h"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></span><span class="pc-e">🐈</span><span class="pc-y">2019</span></div></div>
+          <div class="pc pc-2"><div class="pc-in" style="--c1:#7f5cff;--c2:#00d4ff;--c3:#ff4fd8"><span class="pc-h"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></span><span class="pc-e">🕺</span><span class="pc-y">2021</span></div></div>
+          <div class="pc pc-3"><div class="pc-in" style="--c1:#ffd86f;--c2:#fc6262;--c3:#ffb199"><span class="pc-h"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></span><span class="pc-e">🍳</span><span class="pc-y">2023</span></div></div>
+          <svg class="hero-logo" viewBox="0 0 64 64"><use href="#logo"/></svg>
+          <p class="liked"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg>Лайкнуто в <i>2019</i></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PREVIEW ============================= -->
+    <section class="section" id="preview" aria-labelledby="preview-title">
+      <div class="wrap preview-grid">
+        <div class="preview-head reveal">
+          <p class="kicker">живое демо</p>
+          <h2 class="h2" id="preview-title">Полистай прямо здесь</h2>
+          <p class="lead">Это интерактивный макет приложения: тот же дизайн и те же жесты — только ролики выдуманные.</p>
+        </div>
+        <figure class="phone-stage" id="demo">
+          <div class="phone">
+            <div class="phone-screen">
+              <iframe src="preview/index.html?embed=1" title="Интерактивное демо Shuffler" loading="lazy" referrerpolicy="no-referrer"></iframe>
+            </div>
+          </div>
+          <figcaption class="phone-caption">Демо на русском · данные вымышленные</figcaption>
+        </figure>
+        <div class="preview-more reveal">
+          <ul class="tips">
+            <li><span class="tip-ic"><svg class="ic" aria-hidden="true"><use href="#i-shuffle"/></svg></span>Нажми «Перемешать мои лайки»</li>
+            <li><span class="tip-ic"><svg class="ic" aria-hidden="true"><use href="#i-move"/></svg></span>Свайп или колесо мыши — следующий ролик</li>
+            <li><span class="tip-ic"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg></span>Двойной тап — лайк</li>
+            <li><span class="tip-ic"><svg class="ic" aria-hidden="true"><use href="#i-sliders"/></svg></span>Комментарии и настройки — как в приложении</li>
+          </ul>
+          <p class="note"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span>Всё в демо вымышлено: градиенты вместо видео, эмодзи и придуманные подписи, имена и комментарии. Настоящие ролики появятся только в приложении — из твоих лайков.</span></p>
+          <a class="text-link" href="preview/index.html">Открыть демо на весь экран<svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================== HOW IT WORKS ========================== -->
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="kicker">три шага</p>
+          <h2 class="h2" id="how-title">Как это работает</h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-n" aria-hidden="true">1</span>
+            <span class="step-ic"><svg class="ic" aria-hidden="true"><use href="#i-login"/></svg></span>
+            <h3>Входишь на странице самой платформы</h3>
+            <p>Instagram или Google показывают свою обычную страницу входа, а в Chrome подойдёт вход, уже выполненный в браузере. Пароль вводится только там — Shuffler его не видит.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-n" aria-hidden="true">2</span>
+            <span class="step-ic"><svg class="ic" aria-hidden="true"><use href="#i-history"/></svg></span>
+            <h3>Мы находим твои старые лайки</h3>
+            <p>Shuffler собирает список рилсов и шортсов, которые тебе понравились, — прямо на твоём устройстве.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-n" aria-hidden="true">3</span>
+            <span class="step-ic"><svg class="ic" aria-hidden="true"><use href="#i-shuffle"/></svg></span>
+            <h3>Листаешь — без повторов</h3>
+            <p>Случайный порядок, и ни один ролик не повторится, пока не закончится круг. Потом — новый круг, уже в другом порядке.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= NOSTALGIA BY YEARS ======================= -->
+    <section class="section" id="years" aria-labelledby="years-title">
+      <div class="wrap">
+        <div class="reveal">
+          <p class="kicker">ностальгия по годам</p>
+          <h2 class="h2" id="years-title">Сначала — самое давнее</h2>
+          <p class="lead">Лента начинается с лайков, которые ты поставил годы назад: первые мемы, звук того самого лета, кот, который всё ещё ждёт автобус. Свежие тоже будут — просто чуть позже.</p>
+        </div>
+        <ol class="years reveal" aria-label="Порядок ленты: от старых лайков к новым">
+          <li class="yr-card is-first"><span class="yr-art" style="--c1:#f093fb;--c2:#f5576c" aria-hidden="true">🐈<span class="yr-tag">сначала</span></span><b>2019</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#ff9a8b;--c2:#ff6a88" aria-hidden="true">😼</span><b>2020</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#7f5cff;--c2:#00d4ff;opacity:.92" aria-hidden="true">🕺</span><b>2021</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#a8ff78;--c2:#2bd2a3;opacity:.84" aria-hidden="true">🦖</span><b>2022</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#ffd86f;--c2:#fc6262;opacity:.74" aria-hidden="true">🍳</span><b>2023</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#43e97b;--c2:#38f9d7;opacity:.64" aria-hidden="true">🐸</span><b>2024</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#4facfe;--c2:#00f2fe;opacity:.54" aria-hidden="true">🛹</span><b>2025</b></li>
+          <li class="yr-card"><span class="yr-art" style="--c1:#a18cd1;--c2:#fbc2eb;opacity:.44" aria-hidden="true">🎧</span><b>2026</b></li>
+        </ol>
+        <p class="years-axis" aria-hidden="true"><span>старше</span><span></span><span>новее</span></p>
+        <div class="years-foot reveal">
+          <p class="liked"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg>Лайкнуто в <i>2019</i></p>
+          <p>На каждом ролике — год, когда он тебе понравился.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PRIVACY ============================= -->
+    <section class="section" id="privacy" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <div class="privacy-card reveal">
+          <div>
+            <p class="kicker">приватность</p>
+            <h2 class="h2" id="privacy-title">Всё остаётся у тебя</h2>
+            <p class="lead">Shuffler — не соцсеть и не сервис с аккаунтом. Это спокойный способ пересмотреть то, что тебе уже понравилось.</p>
+            <a class="text-link" href="ru/privacy.html">Политика конфиденциальности<svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          </div>
+          <ul class="facts">
+            <li class="fact"><span class="fact-ic"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"/></svg></span><b>Библиотека — только на устройстве</b><span>Список лайков, история просмотров и настройки хранятся у тебя, а не у нас.</span></li>
+            <li class="fact"><span class="fact-ic"><svg class="ic" aria-hidden="true"><use href="#i-cloud-off"/></svg></span><b>Без наших серверов</b><span>Shuffler не отправляет нам твои данные — нам просто некуда их складывать.</span></li>
+            <li class="fact"><span class="fact-ic"><svg class="ic" aria-hidden="true"><use href="#i-eye-off"/></svg></span><b>Без рекламы и трекинга</b><span>Ни баннеров, ни аналитики, ни чужих пикселей — ни в приложении, ни на этом сайте.</span></li>
+            <li class="fact"><span class="fact-ic"><svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></span><b>Каждое видео ведёт на оригинал</b><span>Shuffler ничего не скачивает: ролик играет с платформы, где он опубликован, и открывается там одним тапом.</span></li>
+          </ul>
+        </div>
+        <p class="indie reveal"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg><span><b>Shuffler — независимый проект.</b> Он не связан с Meta, Instagram, Google или YouTube, не спонсируется и не одобрен ими. Названия платформ упоминаются только затем, чтобы объяснить, откуда берутся твои лайки; это товарные знаки их владельцев.</span></p>
+      </div>
+    </section>
+
+    <!-- ============================== FAQ =============================== -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq-grid">
+        <div class="reveal">
+          <p class="kicker">вопросы</p>
+          <h2 class="h2" id="faq-title">Коротко о главном</h2>
+          <p class="lead">Не нашёл ответа — напиши на <a href="mailto:danivichkin@gmail.com">danivichkin@gmail.com</a>.</p>
+        </div>
+        <div class="faq-list reveal">
+          <details name="faq">
+            <summary>Это безопасно?<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+            <div class="faq-a"><p>Вход происходит на официальной странице Instagram или Google, поэтому Shuffler не видит и не хранит твой пароль. Приложение читает список твоих лайков и ничего не публикует и не меняет в аккаунте без твоего явного действия.</p></div>
+          </details>
+          <details name="faq">
+            <summary>Что вы храните?<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+            <div class="faq-a"><p>У себя — ничего: серверов у Shuffler нет. Библиотека лайков, отметки о просмотренном и настройки живут только на твоём устройстве и удаляются вместе с приложением или расширением.</p><p>Подробности — в <a href="ru/privacy.html">политике конфиденциальности</a>.</p></div>
+          </details>
+          <details name="faq">
+            <summary>Зачем входить в аккаунт?<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+            <div class="faq-a"><p>Твои лайки видны только тебе. Чтобы их найти, Shuffler открывает их от твоего имени — так же, как это делает сама платформа. Без входа список лайков просто недоступен.</p></div>
+          </details>
+          <details name="faq">
+            <summary>Какие платформы поддерживаются?<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+            <div class="faq-a"><p>Лайки из Instagram Reels и YouTube Shorts. Сам Shuffler работает на iPhone (бета в TestFlight), на Android и как расширение для Chrome.</p></div>
+          </details>
+          <details name="faq">
+            <summary>Как сообщить о проблеме?<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+            <div class="faq-a"><p>В приложении: «Настройки» → «Сообщить о проблеме». Или напиши на <a href="mailto:danivichkin@gmail.com?subject=Shuffler">danivichkin@gmail.com</a>. Подробнее — на <a href="ru/support.html">странице поддержки</a>.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= OUTRO ============================== -->
+    <section class="outro" aria-labelledby="outro-title">
+      <div class="wrap reveal">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>
+        <h2 class="outro-q grad" id="outro-title">Помнишь это?</h2>
+        <p>Shuffler сейчас в бете. Напиши — пришлём приглашение для iPhone, Android или Chrome.</p>
+        <a class="btn btn-primary" href="mailto:danivichkin@gmail.com?subject=Shuffler%20beta"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Хочу в бету</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="index.html"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>shuffler</a>
+          <p>Твои старые лайки. Вперемешку.</p>
+        </div>
+        <nav aria-labelledby="foot-docs">
+          <h2 id="foot-docs">Документы</h2>
+          <ul>
+            <li><a href="ru/privacy.html">Конфиденциальность</a></li>
+            <li><a href="ru/terms.html">Условия использования</a></li>
+            <li><a href="ru/support.html">Поддержка</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="foot-en" lang="en">
+          <h2 id="foot-en">In English</h2>
+          <ul>
+            <li><a href="en/privacy.html" hreflang="en">Privacy Policy</a></li>
+            <li><a href="en/terms.html" hreflang="en">Terms of Use</a></li>
+            <li><a href="en/support.html" hreflang="en">Support</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>Связь</h2>
+          <ul>
+            <li><a href="mailto:danivichkin@gmail.com">danivichkin@gmail.com</a></li>
+            <li><a href="en/index.html" hreflang="en" lang="en">English version</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Shuffler</span>
+        <span>Не связан с Meta, Instagram, Google и YouTube.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
